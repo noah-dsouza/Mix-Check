@@ -21,7 +21,7 @@ export function AboutSection() {
     {
       icon: Shield,
       title: 'Evidence-Based',
-      description: 'All recommendations backed by clinical evidence, research publications, and regulatory agency reports for reliable guidance.',
+      description: 'All recommendations supported by clinical evidence, research publications, and regulatory agency reports for reliable guidance.',
     },
   ];
 
