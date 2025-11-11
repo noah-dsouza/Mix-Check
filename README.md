@@ -1,77 +1,73 @@
-# MixCheck
+# MixCheck 💊⚡️
 
-Interactive web interface that lets clinicians or patients explore potential drug–drug interactions using Groq’s Llama‑3.3 model. Users enter two medications (plus optional patient factors), trigger an AI analysis, and review a visual risk gauge, detailed mechanism/evidence/reports, and supporting cards in a polished UI.
+AI-assisted drug interaction explorer with a sleek React UI and Groq’s Llama‑3.3 model. Enter two meds (plus patient factors), tap **Analyze Mix**, and get an animated risk gauge, deep mechanism/evidence/reports, and supporting insights.
 
-## Features
+## ✨ Features
 
-- **Drug Interaction Explorer** – guided inputs with live suggestions for two drugs and common patient factors.
-- **Groq-Powered Analysis** – sends a structured pharmacology prompt to `llama-3.3-70b-versatile` on Groq to obtain a JSON response with risk score, summary, mechanism, evidence, and reported adverse events.
-- **Risk Visualization** – animated `RiskGauge` plus motion-enhanced explanation cards and tabbed content.
-- **Modern UI Kit** – Tailwind-based components with Radix UI primitives, motion animations, Lucide icons, and Sonner toasts.
+- 🎯 **Smart Inputs** – Autosuggested meds, patient-factor chips, validation, motion-enhanced CTA.
+- 🧠 **Groq Analytics** – Structured prompt to `llama-3.3-70b-versatile`, JSON parsing, graceful error toasts.
+- 📊 **Risk Visualization** – Animated circular gauge, glow effects, motion transitions, severity labels.
+- 🧪 **Evidence Tabs** – Mechanism / Evidence / Reports cards with Lucide icons + Radix motion tabs.
+- 🌐 **Polished UX** – Animated background, responsive layout, Tailwind styling, Sonner notifications.
 
-## Tech Stack
+## 🧱 Tech Stack
 
-- [Vite](https://vitejs.dev/) + React 18
-- TypeScript with SWC React plugin
-- Tailwind CSS utilities (in `src/index.css` and component classes)
-- Motion (framer-motion compatible) for animations
-- Radix UI, Lucide, Sonner, Embla carousel, and other supporting libraries
+**Frontend**
+- React 18 + TypeScript (Vite + SWC)
+- Tailwind CSS utility styling
+- Motion (framer-motion compatible) animations
+- Radix UI primitives, Lucide icons, Sonner toasts, Embla carousel
 
-## Getting Started
+**AI Backend**
+- Browser fetch to Groq API with `VITE_GROQ_API_KEY`
+- Structured JSON output parsing and validation
+
+## 🚀 Getting Started
 
 ```bash
 npm install
-npm run dev    # start Vite on http://localhost:3000
+cp .env.example .env.local   # or create manually
+# add VITE_GROQ_API_KEY=sk-your-groq-key
+npm run dev                  # http://localhost:3000
 ```
 
 ### Environment Variables
 
-Create `.env.local` (never commit it) with:
+`VITE_GROQ_API_KEY` is required (note the `VITE_` prefix). Without it the Analyze button shows the “API key not configured” toast.
 
-```
-VITE_GROQ_API_KEY=sk-your-secret-key
-```
-
-The `VITE_` prefix is required so Vite exposes the key to the browser bundle. Without it the Analyze button will show “API key not configured”.
-
-### Production Build
+### Build
 
 ```bash
 npm run build   # emits static assets to dist/
+# optional preview
+npx vite preview
 ```
 
-Preview locally via any static server, e.g. `npx vite preview`.
+## 🌥️ Deploy (Vercel)
 
-## Deployment (Vercel)
+1. Push to GitHub (e.g., `noah-dsouza/Mix-Check`).
+2. In Vercel → **Add New Project** → import repo.
+3. Settings → **Environment Variables** → add `VITE_GROQ_API_KEY`.
+4. Build command: `npm run build`. Output directory: `dist` (also set in `vercel.json`).
+5. Redeploy whenever the env var changes—Vite reads env at build time.
 
-1. Push the repo to GitHub (e.g., `noah-dsouza/Mix-Check`).
-2. In Vercel, “Add New Project” → import the repo.
-3. Under **Settings → Environment Variables**, add `VITE_GROQ_API_KEY`.
-4. Ensure **Build Command** is `npm run build` and **Output Directory** is `dist` (or keep `vercel.json` at the root).
-5. Redeploy whenever env vars change; Vite reads them at build time.
-
-## Project Structure
+## 📂 Structure
 
 ```
 src/
-├── components/
-│   ├── HeroPanel.tsx           # drug inputs + analyze CTA
-│   ├── ResultsSection.tsx      # risk gauge + rich analysis tabs
-│   ├── RiskGauge.tsx           # animated circular gauge
-│   ├── DataCards.tsx, etc.     # supplemental content
-│   └── ui/                     # shared UI helpers (alert, sonner, etc.)
-├── App.tsx                     # orchestrates analyze flow & layout
-├── main.tsx                    # React entry
-└── index.css                   # Tailwind layers and global styles
+├─ components/
+│  ├─ HeroPanel.tsx          # inputs + CTA
+│  ├─ ResultsSection.tsx     # RiskGauge + analysis tabs
+│  ├─ RiskGauge.tsx          # animated SVG arc
+│  ├─ DataCards.tsx, etc.
+│  └─ ui/                    # shadcn-style helpers (alert, sonner, …)
+├─ App.tsx                   # analyze flow & layout
+├─ main.tsx                  # React root
+└─ index.css                 # Tailwind layers + globals
 ```
 
-## Scripts
+## 📝 Notes
 
-- `npm run dev` – Vite dev server.
-- `npm run build` – production build to `dist/`.
-- `npm run preview` *(optional)* – serve the built assets locally.
-
-## Notes
-
-- The Groq call in `src/App.tsx` expects JSON back; guard logic surfaces toast errors if the API fails.
-- Sonner’s `<Toaster />` should be mounted (e.g., in `App.tsx`) so toast notifications render in both dev and production.
+- The Groq response is parsed from JSON; failures show Sonner toasts.
+- Mount `<Toaster />` once so notifications render in dev + prod.
+- Large bundle warning from Vite is informational; consider lazy-loading sections if needed.
