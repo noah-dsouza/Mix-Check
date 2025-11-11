@@ -13,11 +13,11 @@ AI-assisted drug interaction explorer with a sleek React UI and Groq’s Llama�
 ## 🧱 Tech Stack
 
 **Frontend**
-- React 18 + TypeScript (Vite + SWC)
-- Tailwind CSS utility styling
+- React + TypeScript (Vite + SWC)
+- Tailwind CSS  styling
 - Motion (framer-motion compatible) animations
 - Radix UI primitives, Lucide icons, Sonner toasts, Embla carousel
 
 **AI Backend**
-- Browser fetch to Groq API with `VITE_GROQ_API_KEY`
+- Browser fetch to Groq API 
 - Structured JSON output parsing and validation
