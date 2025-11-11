@@ -37,7 +37,7 @@ export function AboutSection() {
         >
           <h2 className="text-[#001B44] mb-4">About MixCheck</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            MixCheck is an AI-powered drug interaction explorer designed to help understand potential 
+            MixCheck is an AI-powered drug interaction explorer designed to help users understand potential 
             medication interactions. Our platform combines cutting-edge technology with comprehensive 
             medical databases to provide instant, evidence-based analysis.
           </p>
